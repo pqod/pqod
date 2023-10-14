@@ -1,0 +1,9 @@
+#fuzz
+##fuzz using a wordlist
+wfuzz -z file,<path_to_wordlist> -u http://<target>/FUZZ
+##fuzz using POST method and two wordlists
+wfuzz -z file,/<path_to_wordlist> -z file,<path_to_wordlist2> http://<target>/login.php -d "user=FUZZ&pass=FUZZ2"
+##fuzz header
+wfuzz -H key:FUZZ
+##choose method
+wfuzz -x [GET|POST]...
