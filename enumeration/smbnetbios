@@ -1,0 +1,17 @@
+#smb
+
+##nmap
+nmap -v -p 139,445 -oA smb.txt <ip.1>-254
+
+##nbtscan
+sudo nbtscan -r <ip>/24
+
+##NSE scripts 
+ls -1 /usr/share/nmap/scripts/smb*
+###SMB discovery script works onl if SMBv1 is enabled on the target
+nmap -v -p 139,445 --script-os-discovery <ip>
+###this script is not attendible
+
+##net
+net view \\<host> \all
+net view \\dc01 \all

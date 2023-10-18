@@ -1,0 +1,17 @@
+
+
+#VRFY request asks the server to verify an email address
+#EXPN ask the server for the membership of mailing list
+
+> nc -nv 192.168.50.8 25
+(UNKNOWN) [192.168.50.8] 25 (smtp) open
+220 mail ESMTP Postfix (Ubuntu)
+> VRFY root
+252 2.0.0 root
+> VRFY idontexist
+550 5.1.1 <idontexist>: Recipient address rejected: User unknown in local recipient table
+
+##install telnet on windows
+dism /online /Enable-Feature /FeatureName:TelnetClient
+telnet <ip> 25
+
