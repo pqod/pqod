@@ -1,0 +1,53 @@
+- username and hostname
+- group membership of the current user
+- existing user and groups
+- operating system, version and architecture
+- network information
+- installed applications
+- running processes
+
+
+
+##user
+whoami
+
+##display all groups of current user
+whoami /groups
+
+##other users and groups on the system
+Get-LocalUser
+##OR
+net user [user]
+##other groups on system
+Get-Localgroup [group]
+#OR
+net localgroup [group]
+
+
+##see if a user is a member of host
+Get-LocalGroupMember <user>
+
+Get-LocalGroupMember <user>
+
+
+
+##HOSTMACHINE ENUM
+
+###system
+systeminfo
+
+###network
+ipconfig /all
+route print
+netstat -ano
+
+
+##APPLICATION ENUM
+Get-ItemProperty "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*" | select displayname
+Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*" | select displayname
+
+##PROCESS ENUM
+Get-Process
+
+
+

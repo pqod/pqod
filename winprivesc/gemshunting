@@ -1,0 +1,17 @@
+
+
+##search gems
+### extensions: *.txt,*.pdf,*.xls,*.xlsx,*.doc,*.docx
+
+Get-ChildItem -Path C:\ -Include *.kdbx -File -Recurse -ErrorAction SilentlyContinue
+
+Get-ChildItem -Path C:\xamp -Include *.txt,*.ini -File -recurse -ErrorAction SilentlyContinue
+
+
+##History
+
+Get-History
+
+type (Get-PSReadlineOption).HistorySavePath
+
+

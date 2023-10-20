@@ -1,0 +1,15 @@
+
+###move to user
+
+runas /user:<user> cmd
+
+###move to computer
+$password = ConverTo-SecureString "password" -AsPlainText -Force
+$cred= New-Object System.management.Automation.PSCredential("<user>", $password)
+
+Enter-PSSession -ComputerName <computer> -Credential <$cred>
+
+
+##move computer/user
+evil-winrm -i <ip> -u <user> -p <password>
+
