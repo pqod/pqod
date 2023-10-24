@@ -1,0 +1,68 @@
+#cmd
+
+help
+
+<command> /?
+e.g. ipconfig /?
+##OR
+help <command>
+e.g. help time
+##list of all CMD command
+https://ss64.com/nt/
+https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/windows-commands
+##clear
+cls
+##history
+doskey /history
+##open interactive list of history
+F7
+##listing directory
+dir
+##working directory
+cd
+##moving 
+cd <path>
+##absolute path
+C:\
+##relative path
+cd .\<path>
+##directory tree
+tree
+tree <path>
+##list all file and directories
+tree /F
+tree /F <path>
+##Interesting Directories
+%SYSTEMROOT%\Temp	C:\Windows\Temp
+%TEMP%			C:\Users\<user>\AppData\Local\Temp
+%PUBLIC%		C:\Users\Public
+%ProgramFiles%		C:\Program Files
+%ProgramFiles(x86)%	C:\Program Files (x86)
+
+##create new directories
+md <directory>
+##OR
+mkdir <directory>
+##remove directory
+rd <directory>
+rmdir <directory>
+##erase directory and its content
+rd /S <directory>
+##move a directory
+move <source> <destination>
+##xcopy (remove the read-only bit frm the file when moving them)
+##options /E copy any files and subdirectories
+##when performing the duplication,xcopy will reset any attributes the file had.
+##options /K retain the file's attributes (such as read-only or hidden)
+xcopy <source> <destination> <options>
+
+##robocopy basics
+
+
+
+
+
+
+
+
+
