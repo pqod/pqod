@@ -57,7 +57,116 @@ move <source> <destination>
 xcopy <source> <destination> <options>
 
 ##robocopy basics
+###move files locally and across network while retaining the file data and attributes to include
+###timestamps,ownership,ACLs,and other flags.
+robocopy <source> <destination>
+###Robocopy can also work with system, read-only, and hidden files. 
+###As a user, this can be problematic if we do not have the SeBackupPrivilege and auditing privilege attributes.
+###This could stop us from duplicating or moving files and directories
+###We can use /MIR options to bypass this problem
 
+##Robocopy Backup Mode Fail
+
+robocopy /E /B /L <source> <destination>
+
+###if we have insufficient permission this command fail but we can utilize /MIR options for execute the command.
+###Be aware that /MIR mark this files as a system backup so hide them from view. We can bypass this throuble by clear the additional attributes if we add /A-:SH options.
+###we can use /L options for what if command ( see but not execute )
+
+##Robocopy /MIR
+robocopy /E /MIR /A-:SH <source> <destination>
+
+#Files
+##Content Files
+##--------------------------------##
+##More
+##in buffering scroll down text
+more <files>
+##compact no-space mode view
+more /S <file>
+## pipelined more
+ipconfig /all | more
+##--------------------------------##
+##openfiles
+##we can see what file on our local pc or a remote host has open and from witch user.
+##this command requires administrator privileges on the host.
+##with this tool, we can view open files,disconnect open files,and kick users from accessing specific files.
+##is not enabled by default on windows systems.
+##--------------------------------##
+##type can display contents of multiple text files at once.
+##type has ability of not lock files.
+type <file>
+
+##Redirect with type
+type passwd.txt >> secrets.txt
+
+##--------------------------------##
+##Create and Modify a File
+
+##echo to create and append files
+echo <text> > file.txt
+
+##fsutils can do many things such as create a file
+fsutil file createNew <file.txt> <length>
+
+##ren
+##rename file
+ren <file.txt> <renfile.txt>
+
+## Input / Output
+Command
+>
+>>
+<
+ 
+## |
+##ensure that first commnad ping execute and then type
+##it does not care if the command succeded or failed
+ifconfig /all | find /i "IPV4" 
+
+## ||
+## if first command succeeds then the second command must be execute
+
+## &
+##ensure that first commnad ping execute and then type
+##it does not care if the command succeded or failed
+ping 8.8.8.8 & type <file>.txt
+
+## &&
+## if first command succeeds then the second command must be execute
+cd <path> && echo 'did this work' > yes.txt 
+
+#Deleting files
+
+##del
+del <file>
+
+##erase
+erase <file1> <file2>
+
+##use attribute to filter command execution
+##View files with Read only
+dir /A:R
+##delete a read-only file
+del /A:R *
+##view hidden dile
+dir /A:H
+##delete hidden files
+del /A:H
+
+
+##copy
+##options /V to validate checksum of file
+copy <source> <destination>
+##move
+move <source> <destination>
+
+
+
+
+
+
+ 
 
 
 
