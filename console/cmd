@@ -227,6 +227,10 @@ cmp <file1> <file2>
 ##we suggest to use help /fc.exe /?
 ##/O output file
 
+##Sort
+sort.exe <sourcefile> /O <destfile>
+##/unique
+sort.exe <file> /unique
 
 
 
