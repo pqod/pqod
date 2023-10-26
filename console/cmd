@@ -161,6 +161,44 @@ copy <source> <destination>
 ##move
 move <source> <destination>
 
+#Gathering System Information
+##--------------------------------##
+##Examining the System
+##Systeminfo Output
+systeminfo
+##Hostname Output
+hostname
+##Version Output
+ver
+##--------------------------------##
+##Scoping Network
+##Ipconfig
+ipconfig
+##ARP to Find Additional Host
+arp /a
+##--------------------------------##
+##Understanding Our Current User
+whoami
+##Privilege for our privileges information
+whoami /priv
+##Understanding of our current user's privileges
+whoami /groups
+##--------------------------------##
+##Investigating Other Users/Groups
+##Net User
+net user
+##groups
+net group
+##local
+net localgroup
+##--------------------------------##
+##share on host
+net share
+##New view display to us any shared resources the host
+##you are issuing the coimmand against knows of.
+##This includes domain resources,shares,printer,and more.
+net view
+
 
 
 
