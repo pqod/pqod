@@ -198,6 +198,34 @@ net share
 ##you are issuing the coimmand against knows of.
 ##This includes domain resources,shares,printer,and more.
 net view
+##--------------------------------##
+##Find Files
+##Using Where
+where <file>
+##recursive 
+where /R <path_to_search> <where>
+##using wildcards
+where /R <path_to_search> *.csv
+##--------------------------------##
+##Find content File
+##Basic Find
+find <name> <path>
+##/V Not Clause
+##/N display line numbers
+##/I ignore case 
+find /N /I /V <word_to_search> <file>
+##Findstr i similar to find but with pattern,regex,wildcards...
+findstr
+##--------------------------------##
+
+##Diff content-file
+##cmp
+cmp <file1> <file2>
+##default difference shown in a decimal format
+##/A difference in ASCII format
+##/L line numbers
+##we suggest to use help /fc.exe /?
+##/O output file
 
 
 
