@@ -240,6 +240,15 @@ sort.exe <file> /unique
 set <namevar>=<value>
 %<namevar>%
 
+##Important Environment Variables
+##complete list at https://ss64.com/nt/syntax-variables.html
+%PATH%
+%OS%
+%SYSTEMROOT%
+%LOGONSERVER%
+%USERPROFILE%
+%ProgramFiles%
+%ProgramFiles(x86)%
 
 
 
