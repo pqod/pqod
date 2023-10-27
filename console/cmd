@@ -232,6 +232,13 @@ sort.exe <sourcefile> /O <destfile>
 ##/unique
 sort.exe <file> /unique
 
+##--------------------------------##
+
+##Environment Variables
+##Variable Scope: Global -> accessible globally
+##Local -> accessible within a local context
+set <namevar>=<value>
+%<namevar>%
 
 
 
