@@ -1,0 +1,10 @@
+#enum shares
+
+##use Powerview
+Find-DomainShare
+
+##access to share with ls
+ls \\<machine>\\<shares>\\<folder>
+##print with cat
+##decrypt gpp-decrypt "hash"
+

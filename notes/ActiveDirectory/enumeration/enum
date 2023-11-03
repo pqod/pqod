@@ -1,0 +1,42 @@
+##Remember bypass script
+powershell -ep bypass
+
+#basic enumeration
+##enumerate user in a domain
+net user <user> /domain
+##enumerate groups in a domain
+net group /domain
+##enumerate group memebers
+net group <group_name> /domain
+
+#.NET enumeration
+##.NET classes related to AD
+[System.DyrectoryServices.ActiveDirectory.Domain]::HetCurrentDomain()
+
+
+#Enumeration with Powerview
+Import-Module .\PowerView.ps1
+##basic information about domain
+Get-NetDomain
+##get list of all users
+Get-NetUser
+Get-NetUser | select cn,pwdlastset,lastlogon
+##enumerate groups
+Get-NetGroup | select cn
+##investigate specific group
+Get-NetGroup <groupname> | select member
+##enumerate operating systems
+Get-NetComputer
+##if current user has administrative privilege
+Find-LocalAdminAccess
+
+#enumerate session
+Get-NetSession -ComputerName <machine_name> -Verbose
+###to enumerate with netsessionenum the permission is required and is defined in SrvsvcSessionInfo registry key in
+###HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Service\LanmanServer\DefaultSecurity
+#Get-ACL of object
+Get-Acl -Path HKLM:SYSTEM\CurrentControlSet\Services\LanmanServer\DefaultSecurity\ | fl
+
+#Enumerate session with PsLoggedon.exe
+.\PsLoggedon.exe \\<computer_name>
+

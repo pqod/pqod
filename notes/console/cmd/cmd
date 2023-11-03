@@ -250,9 +250,18 @@ set <namevar>=<value>
 %ProgramFiles%
 %ProgramFiles(x86)%
 
-
-
- 
+#Service Controller
+##sc without parameter help description
+##query
+##spacing = se... is crucial!
+##query all active services
+sc query type= service
+##query specific services
+sc query <name_services>
+sc query windefend
+##stop services
+sc stop <services>
+sc stop windefend
 
 
 

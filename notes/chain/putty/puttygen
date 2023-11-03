@@ -1,0 +1,4 @@
+##ppk to ssh
+puttygen key.ppk -O private-openssh -o id_rsa
+chmod 600 id_rsa
+ssh -i id_rsa root@target
