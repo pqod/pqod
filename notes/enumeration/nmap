@@ -1,0 +1,14 @@
+#nmap
+
+nmap -sC -sV -T$ -oA nmap/initial <target>
+
+#nmap scripts-----------------
+##enumerate scripts
+ls /usr/share/nmap/scripts/
+##help scripts
+nmap --script-help <name_nse>
+##help scripts args
+cat /usr/share/nmap/scripts/http-affiliate-id.nse | grep args
+##use scripts
+nmap -n -p 80 --script <name_nse> <target>
+#nmap scripts------------------

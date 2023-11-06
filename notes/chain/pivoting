@@ -1,0 +1,2 @@
+#proxychains
+proxychains autorecon <ip_targets1> <ip_targets2>

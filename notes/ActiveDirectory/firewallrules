@@ -1,0 +1,2 @@
+#NetFirewallRule
+New-NetFirewallRule -Protocol TCP -LocalPort 1090 -Direction Inbound -Action Allow -DisplayName SOCK

