@@ -1,0 +1,17 @@
+#windows
+wmic /node:<host> /user:<user> /password:<password> process calll create "<nameprocess>"
+#OR
+$username = '<username>';
+$password = '<passwords>';
+$secureString = ConvertTo-SecureString $password -AsPlaintext -Force;
+$credential = New-Object System.Management.Automation.PSCredential $username,$secureString;
+
+#OR Create A Common Information Model (CIM)
+$options = New-CimSessionOption -protocol DCOM
+$session = New-CimSession -ComputerName <ip> -Credential $credential -SessionOption $Options
+$command = 'calc'
+#make togheter all arguments
+Invoke-CimMethod -CimSession $Session -ClassName Win32_Process -methodName Create -Arguments @{CommandLine = $Command};
+
+
+
