@@ -1,0 +1,3 @@
+Invoke-BloodHound -CollectionMethod All -OutputDirectory C:\Users\<user>\Desktop
+sudo neo4j start
+

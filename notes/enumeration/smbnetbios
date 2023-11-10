@@ -15,3 +15,21 @@ nmap -v -p 139,445 --script-os-discovery <ip>
 ##net
 net view \\<host> \all
 net view \\dc01 \all
+
+#SMBMAP
+#Guest login
+smbmap -H <target> -u " " 
+smbmap -H <target> -u <user> -p <password>
+
+#SMBCLIENT
+smbclient -L <target>
+smbclient \\\\<target>\\<share> -U <user>
+
+
+##MOUNT SMB
+smbmount <share> <local_dirmount> smbfs username=<username>%<password>
+
+
+#SMBGET
+#Download
+smbget -R smb://<share>/<directory> 

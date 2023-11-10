@@ -1,0 +1,4 @@
+Import-Module .\PowerView.ps1
+
+Get-NetDomain
+

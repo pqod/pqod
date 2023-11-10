@@ -1,0 +1,6 @@
+Find-DomainShare
+ls \\<host>\<share>\directory
+cat \\<host>\<share>\directory\file
+
+#cpassword in backup policy are AES-256 gpp-decrypt
+gpp-decrypt "<key>"

