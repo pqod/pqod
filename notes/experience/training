@@ -1,0 +1,18 @@
+#1
+masscan -i tun0 <> -p0-65535 --rate 1000
+dirb web-browser apache folder
+webpage playsms default creds admin/admin
+upload file https://www.exploit-db.com/exploits/42003
+metasploit playsms
+#PE
+kernel vuln -> https://www.exploit-db.com/exploits/45010 -> gcc -o <out> 45010.c
+#2
+enumeration webserver fuff
+tiki diclosure version default creds admin/admin -> https://www.exploit-db.com/exploits/40053 -> http://<>:8080/tiki/vendor_extra/elfinder/files/evil.php?fexec=
+get reverse shell with msfvenom exe and upload -> http://192.168.27.83:8080/tiki/vendor_extra/elfinder/files/evil.php?fupload=mrev.exe
+#PE
+SentryHD\config.ini disclosure -> vuln exploit 41090.py -> pyinstaller convert py to exe
+connect to proxychain and rdesktop
+#3
+nmap libssh0.8.3 vulnerable -> https://www.exploit-db.com/exploits/46307
+
