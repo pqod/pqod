@@ -1,2 +1,1 @@
-#ldapsearch
 ldapsearch -h $target -bx "DC=domain,DC=htb"

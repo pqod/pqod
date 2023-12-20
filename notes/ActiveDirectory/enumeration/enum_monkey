@@ -1,0 +1,22 @@
+powershell -ep bypass
+
+net user $user /domain
+net group /domain
+net group $group_name /domain
+
+[System.DyrectoryServices.ActiveDirectory.Domain]::HetCurrentDomain()
+
+
+PW$>Import-Module .\PowerView.ps1
+PW$>Get-NetDomain
+PW$>Get-NetUser
+PW$>Get-NetUser | select cn,pwdlastset,lastlogon
+PW$>Get-NetGroup | select cn
+PW$>Get-NetGroup $groupname | select member
+PW$>Get-NetComputer
+PW$>Find-LocalAdminAccess
+
+PW$>Get-NetSession -ComputerName $machine_name -Verbose
+PW$>Get-Acl -Path HKLM:SYSTEM\CurrentControlSet\Services\LanmanServer\DefaultSecurity\ | fl
+
+.\PsLoggedon.exe \\$computer_name
